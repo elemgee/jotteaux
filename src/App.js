@@ -3,6 +3,7 @@ import './App.css';
 
 import GuessedWords from "./GuessedWords/GuessedWords";
 import Congrats from "./Congrats/Congrats";
+import GuessInput from "./GuessInput/GuessInput";
 
 class App extends Component {
 
@@ -10,8 +11,9 @@ class App extends Component {
   render() {
     return (
         <div className="container">
-            <h1>Jotteaux</h1>
+            <h1 className="jumbotron text-center">Jotteaux</h1>
 <Congrats success={true} />
+<GuessInput />
 <GuessedWords guessedWords={[{guessedWord: 'train', letterMatchCount: 3}]} />
          </div>
     );
