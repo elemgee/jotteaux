@@ -1,7 +1,16 @@
 import checkPropTypes from 'check-prop-types';
+import {createStore} from "redux";
+import rootReducer from '../src/reducers';
 
 
-
+/**
+ *
+ * @param initialState
+ * @returns {Store<CombinedState<unknown>, AnyAction>}
+ */
+export const storeFactory = (initialState) => {
+ return createStore(rootReducer, initialState);
+}
 
 /**
  *
