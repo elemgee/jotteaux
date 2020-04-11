@@ -9,17 +9,17 @@ const GuessedWords = (props) => {
         const guessedWordsRows = props.guessedWords.map((guess, index) => (
             <tr data-test="guessed-word" key={index}>
                 <td>{guess.guessedWord}</td>
-                <td>{guess.letterMatchCount}></td>
+                <td className="text-center">{guess.letterMatchCount}</td>
             </tr>
         ));
         contents = (
-            <div data-test="guessed-words">
+            <div data-test="guessed-words" >
                 <h3>Guessed Words</h3>
-                <table>
+                <table className="table table-striped ">
                     <thead>
                     <tr>
                         <th>guess</th>
-                        <th>matching letters</th>
+                        <th className="text-center">matching letters</th>
                     </tr>
                     </thead>
                     <tbody>
