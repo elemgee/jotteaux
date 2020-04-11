@@ -4,26 +4,44 @@ import {findByTestAttr, storeFactory} from "../../test/TestUtils";
 import GuessInput from "./GuessInput";
 
 
-const setup = (initialState={}) => {
+const setup = (initialState = {}) => {
     const store = storeFactory(initialState);
-    const wrapper = shallow(<GuessInput store={store} />);
+    const wrapper = shallow(<GuessInput store={store}/>).dive().dive();
     return wrapper;
 }
 
-
 describe('render', () => {
     describe('word has not been guessed', () => {
-        test('renders component without error', () => {});
-        test('renders input box', () => {});
-        test('renders submit button', () => {});
+        let wrapper;
+        beforeEach(() => {
+            const initialState = {success: false};
+            wrapper = setup(initialState);
+        });
+
+
+        test('render component without error',() => {
+            const component = findByTestAttr(wrapper,"component-input");
+            expect(component.length).toBe(1);
+        });
+        test('renders input box', () => {
+            const component = findByTestAttr(wrapper, "input-box");
+            expect(component.length).toBe(1);
+        });
+        test('renders submit button', () => {
+            const component = findByTestAttr(wrapper, "submit-button");
+            expect(component.length).toBe(1);
+        });
     });
 
 
     describe('word has  been guessed', () => {
-        test('DOES NOT render input box', () => {});
-        test('DOES NOT render submit button', () => {});
+        test('DOES NOT render input box', () => {
+        });
+        test('DOES NOT render submit button', () => {
+        });
     });
 });
 
 
-describe('update state', () => {})
+describe('update state', () => {
+})

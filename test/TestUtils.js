@@ -3,17 +3,11 @@ import {createStore} from "redux";
 import rootReducer from '../src/reducers';
 
 
-/**
- *
- * @param initialState
- * @returns {Store<CombinedState<unknown>, AnyAction>}
- */
-export const storeFactory = (initialState) => {
- return createStore(rootReducer, initialState);
-}
+
+
 
 /**
- *
+ * @function findByTestAttr
  * @param wrapper
  * @param val
  */
@@ -22,10 +16,24 @@ export const findByTestAttr = (wrapper, val) => {
 }
 
 
+/**
+ * @function checkProps
+ * @param component
+ * @param conformingProps
+ */
 export const checkProps = (component, conformingProps) => {
    const propError = checkPropTypes(component.propTypes,
        conformingProps,
        'prop',
        component.name);
    expect(propError).toBeUndefined();
+}
+
+/**
+ * @function storeFactor
+ * @param initialState
+ * @returns {Store<CombinedState<unknown>, AnyAction>}
+ */
+export const storeFactory = (initialState) => {
+    return createStore(rootReducer, initialState);
 }
