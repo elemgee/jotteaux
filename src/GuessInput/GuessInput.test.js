@@ -40,6 +40,10 @@ describe('render', () => {
             const initialState = {success: true};
             wrapper = setup(initialState);
         });
+        test('render component without error', () => {
+            const component = findByTestAttr(wrapper, "component-input");
+            expect(component.length).toBe(1);
+        });
 
         test('DOES NOT render input box', () => {
             const component = findByTestAttr(wrapper, "input-box");
