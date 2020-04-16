@@ -11,6 +11,13 @@ const setup = (initialState = {}) => {
 }
 
 describe('render', () => {
+
+
+    test('render component without error', () => {
+        const component = findByTestAttr(setup({}), "component-guess-input");
+        expect(component.length).toBe(1);
+    });
+
     describe('word has not been guessed', () => {
         let wrapper;
         beforeEach(() => {
@@ -19,16 +26,12 @@ describe('render', () => {
         });
 
 
-        test('render component without error', () => {
-            const component = findByTestAttr(wrapper, "component-input");
-            expect(component.length).toBe(1);
-        });
         test('renders input box', () => {
-            const component = findByTestAttr(wrapper, "input-box");
+            const component = findByTestAttr(wrapper, "guess-input");
             expect(component.length).toBe(1);
         });
         test('renders submit button', () => {
-            const component = findByTestAttr(wrapper, "submit-button");
+            const component = findByTestAttr(wrapper, "guess-submit");
             expect(component.length).toBe(1);
         });
     });
@@ -41,16 +44,16 @@ describe('render', () => {
             wrapper = setup(initialState);
         });
         test('render component without error', () => {
-            const component = findByTestAttr(wrapper, "component-input");
+            const component = findByTestAttr(wrapper, "component-guess-input");
             expect(component.length).toBe(1);
         });
 
         test('DOES NOT render input box', () => {
-            const component = findByTestAttr(wrapper, "input-box");
+            const component = findByTestAttr(wrapper, "guess-input");
             expect(component.length).toBe(0);
         });
         test('DOES NOT render submit button', () => {
-            const component = findByTestAttr(wrapper, "submit-button");
+            const component = findByTestAttr(wrapper, "guess-submit");
             expect(component.length).toBe(0);
         });
     });
