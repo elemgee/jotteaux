@@ -1,7 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+
 import {findByTestAttr, storeFactory} from "../../test/TestUtils";
-import GuessInput from "./GuessInput";
+import GuessInput, {UnconnectedGuessInput} from "./GuessInput";
 
 
 const setup = (initialState = {}) => {
@@ -11,7 +12,6 @@ const setup = (initialState = {}) => {
 }
 
 describe('render', () => {
-
 
     test('render component without error', () => {
         const component = findByTestAttr(setup({}), "component-guess-input");
@@ -60,5 +60,50 @@ describe('render', () => {
 });
 
 
-describe('update state', () => {
-})
+describe('redux props', () => {
+    test('has success piece of state as prop', () => {
+        const success = true;
+        const wrapper = setup({success});
+        const successProp = wrapper.instance().props.success;
+        expect(successProp).toBe(success);
+    });
+
+    test('check guessWord action creator is a function prop', () => {
+        const wrapper = setup();
+        const guessWordProp = wrapper.instance().props.guessWord;
+        expect(guessWordProp).toBeInstanceOf(Function);
+    })
+});
+
+describe('`guessWord` action creator call', () => {
+
+    let guessWordMock;
+    let wrapper;
+    const guessedWord = 'train';
+
+    beforeEach(() => {
+        guessWordMock = jest.fn();
+        wrapper = shallow(<UnconnectedGuessInput guessWord={guessWordMock} />);
+        wrapper.setState({currentGuess: guessedWord});
+        const submitButton = findByTestAttr(wrapper, 'guess-submit');
+        submitButton.simulate('click', {preventDefault(){}});
+    });
+
+
+    test('`guessWord` was called once', () => {
+        const guessWordCallCount = guessWordMock.mock.calls.length;
+        expect(guessWordCallCount).toBe(1);
+    });
+
+    test('calls `guessedWord` with input value as argument',() => {
+        console.log(guessWordMock.mock.calls);
+        const guessedWordArg = guessWordMock.mock.calls[0][0];
+        expect(guessedWordArg).toBe(guessedWord);
+    });
+
+    test ('input box clears on submit', () => {
+       expect(wrapper.state('currentGuess')).toBe('');
+    });
+
+
+});
