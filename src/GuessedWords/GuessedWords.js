@@ -7,7 +7,7 @@ const GuessedWords = (props) => {
         contents = (<div className=" alert alert-warning  h3 " role="alert"  data-test="guess-instructions">Try to guess the secret word!</div>)
     } else {
         const rowclass = (word,score) => {
-            if ( score == 5) {
+            if ( score === 5) {
                 return "alert-success";
             } else {
                 return "";
