@@ -10,15 +10,24 @@ import {getSecretWord} from "./actions";
 export class UnconnectedApp extends Component {
     componentDidMount() {
         this.props.getSecretWord();
+        console.log("props in UnconnectedApp", this.props);
     }
 
     render() {
+        const secwrddiv = this.props.secretWord != null
+            ? (<div className="alert alert-info">Hint: The secret word is {this.props.secretWord}</div>)
+            : (<div className="alert alert-danger">error thinking of a secret word </div>);
+
+
         return (
             <div className="container" data-test="component-app">
                 <h1 className="jumbotron text-center">Jotteaux</h1>
                 <Congrats success={this.props.success}/>
                 <GuessInput/>
+
                 <GuessedWords guessedWords={this.props.guessedWords}/>
+                {secwrddiv}
+
             </div>
         );
     }

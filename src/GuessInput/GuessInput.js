@@ -6,7 +6,7 @@ export class UnconnectedGuessInput extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {currentGuess: null}
+        this.state = {currentGuess: ''}
         this.submitGuessedWord = this.submitGuessedWord.bind(this);
     }
 
