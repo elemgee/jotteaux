@@ -8,15 +8,30 @@ import GuessInput from "./GuessInput/GuessInput";
 import {getSecretWord} from "./actions";
 
 export class UnconnectedApp extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = { cheat: false, }
+    }
+
     componentDidMount() {
         this.props.getSecretWord();
         console.log("props in UnconnectedApp", this.props);
     }
 
     render() {
-        const secwrddiv = this.props.secretWord != null
-            ? (<div className="alert alert-info">Hint: The secret word is {this.props.secretWord}</div>)
-            : (<div className="alert alert-danger">error thinking of a secret word </div>);
+        const secwrddiv = this.state.cheat
+            ? (<div className="alert alert-info"
+                    onClick={(evt) => this.setState({cheat: false})}
+            >Hint: The secret word is {this.props.secretWord}</div>)
+        : (                    <button
+                data-test="cheat-submit"
+                type="submit"
+                className="btn btn-secondary "
+                onClick={(evt) => this.setState({cheat: true})}>
+                cheat
+            </button>);
 
 
         return (

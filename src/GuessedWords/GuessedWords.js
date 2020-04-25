@@ -13,7 +13,7 @@ const GuessedWords = (props) => {
                 return "";
             }
         }
-        const guessedWordsRows = props.guessedWords.map((guess, index) => (
+        const guessedWordsRows = props.guessedWords.reverse().map((guess, index) => (
             <tr data-test="guessed-word" key={index} className={rowclass(guess.guessedWord, guess.letterMatchCount)}>
                 <td>{guess.guessedWord}</td>
                 <td className="text-center">{guess.letterMatchCount}</td>
