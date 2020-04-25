@@ -6,8 +6,15 @@ const GuessedWords = (props) => {
     if (props.guessedWords.length === 0) {
         contents = (<div className=" alert alert-warning  h3 " role="alert"  data-test="guess-instructions">Try to guess the secret word!</div>)
     } else {
+        const rowclass = (word,score) => {
+            if ( score == 5) {
+                return "alert-success";
+            } else {
+                return "";
+            }
+        }
         const guessedWordsRows = props.guessedWords.map((guess, index) => (
-            <tr data-test="guessed-word" key={index}>
+            <tr data-test="guessed-word" key={index} className={rowclass(guess.guessedWord, guess.letterMatchCount)}>
                 <td>{guess.guessedWord}</td>
                 <td className="text-center">{guess.letterMatchCount}</td>
             </tr>
